@@ -16,6 +16,7 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-text-field 
+              @keyup.enter="drawer = false"
               v-model="searchText"
               placeholder="Search"
               solo hide-details single-line>
@@ -49,7 +50,8 @@
       <v-spacer></v-spacer>
 
       <!-- hide search field in xs -->
-      <v-text-field class="hidden-xs-only"
+      <v-text-field 
+        class="hidden-xs-only"
         prepend-icon="search"
         v-model="searchText"
         placeholder="Search"
@@ -71,7 +73,26 @@
           { title: 'Home', icon: 'home', link: '/' },
         ],
         searchText: '',
+        $_searchTextTimeout: null,
       };
+    },
+    methods: {
+    },
+    watch: {
+      searchText(val) {
+        this.$store.commit('setLoading', val !== '');
+        this.$store.commit('setSearchValue', val);
+
+        // if already searching, remove old timeout
+        if (this.$_searchTextTimeout !== null && this.$_searchTextTimeout !== undefined) {
+          clearTimeout(this.$_searchTextTimeout);
+        }
+
+        // start new timeout
+        this.$_searchTextTimeout = setTimeout(() => {
+          this.$store.commit('setLoading', false);
+        }, 1000);
+      },
     },
   };
 
