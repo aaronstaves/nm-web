@@ -10,12 +10,9 @@
       </v-flex>
 
       </v-flex>
-      <v-flex xs12 class="ghosted--text text-xs-center" v-if="searchValue === ''">
-        <h3>No Shows Found</h3>
+      <v-flex xs12 class="ghosted--text text-xs-center">
+        <h3>{{ searchDescription }}</h3>
       </v-flex>
-			<v-flex xs12 class="ghosted--text text-xs-center" v-else>
-        <h3>Searching for {{ searchValue }}</h3>
-			</v-flex>
 
     </v-layout>
   </v-container>  
@@ -26,6 +23,17 @@ export default {
   computed: {
     isLoading() {
       return this.$store.getters.isLoading;
+    },
+    errorMessage() {
+      return this.$store.getters.errorMessage;
+    },
+    searchDescription() {
+      if (this.$store.getters.isLoading) {
+        return `Searching for ${this.searchValue}`;
+      } else if (this.errorMessage !== null && this.errorMessage !== undefined) {
+        return 'Search Failed';
+      }
+      return 'No Shows Found';
     },
     searchValue() {
       return this.$store.getters.searchValue;

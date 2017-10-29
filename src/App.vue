@@ -58,6 +58,7 @@
         solo hide-details single-line>
       </v-text-field>
     </v-toolbar>
+    <app-alert></app-alert>
     <main>
       <router-view></router-view>
     </main>
@@ -76,12 +77,11 @@
         $_searchTextTimeout: null,
       };
     },
-    methods: {
-    },
     watch: {
       searchText(val) {
         this.$store.commit('setLoading', val !== '');
         this.$store.commit('setSearchValue', val);
+        this.$store.dispatch('clearError');
 
         // if already searching, remove old timeout
         if (this.$_searchTextTimeout !== null && this.$_searchTextTimeout !== undefined) {
@@ -90,7 +90,7 @@
 
         // start new timeout
         this.$_searchTextTimeout = setTimeout(() => {
-          this.$store.commit('setLoading', false);
+          this.$store.dispatch('loadShows');
         }, 1000);
       },
     },
