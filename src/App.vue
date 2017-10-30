@@ -1,62 +1,33 @@
 <template>
   <v-app>
-
-    <v-navigation-drawer
-      light
-      temporary
-      v-model="drawer"
-      light
-      overflow
-      absolute
-    >
-      <v-list class="pa-1">
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon>search</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-text-field 
-              @keyup.enter="drawer = false"
-              v-model="searchText"
-              placeholder="Search"
-              solo hide-details single-line>
-            </v-text-field>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-      <v-list class="pt-0" dense>
-        <v-divider></v-divider>
-        <v-list-tile v-for="item in items" :key="item.title" :to="item.link" @click="drawer = false">
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
-
-    <!-- toolbar -->
-    <v-toolbar dark color="primary">
-      
-      <!-- show hamburger for xs -->
-      <v-toolbar-side-icon 
-        class="hidden-sm-and-up"
-        @click.stop="drawer = !drawer"
-      >
-      </v-toolbar-side-icon>
+    <!-- large toolbar -->
+    <v-toolbar dark color="primary" class="hidden-xs-only">
       <v-toolbar-title class="white--text">NM Demo: TV Shows</v-toolbar-title>
       <v-spacer></v-spacer>
-
-      <!-- hide search field in xs -->
       <v-text-field 
-        class="hidden-xs-only"
         prepend-icon="search"
         v-model="searchText"
         placeholder="Search"
         solo hide-details single-line>
       </v-text-field>
+    </v-toolbar>
+
+    <!-- small toolbar -->
+    <v-toolbar dark color="primary" class="hidden-sm-and-up" extended>
+      <v-layout row wrap class="mt-5">
+        <v-flex xs12 class="text-xs-center">
+          <v-toolbar-title class="white--text">NM Demo: TV Shows</v-toolbar-title>
+        </v-flex>
+        <!-- hide search field in xs -->
+        <v-flex xs12 class="pt-2">
+        <v-text-field 
+          prepend-icon="search"
+          v-model="searchText"
+          placeholder="Search"
+          solo hide-details single-line>
+        </v-text-field>
+        </v-flex>
+      </v-layout>
     </v-toolbar>
     <app-alert></app-alert>
     <main>
@@ -69,10 +40,6 @@
   export default {
     data() {
       return {
-        drawer: false,
-        items: [
-          { title: 'Shows', icon: 'shows', link: '/' },
-        ],
         searchText: '',
         $_searchTextTimeout: null,
       };
