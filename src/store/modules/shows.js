@@ -38,7 +38,7 @@ const shows = {
   },
   getters: {
     loadedShows(state) {
-      return state.loadedShows;
+      return state.loadedShows.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase());
     },
   },
 };
