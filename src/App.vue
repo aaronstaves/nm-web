@@ -71,7 +71,7 @@
       return {
         drawer: false,
         items: [
-          { title: 'Home', icon: 'home', link: '/' },
+          { title: 'Shows', icon: 'shows', link: '/' },
         ],
         searchText: '',
         $_searchTextTimeout: null,
@@ -81,6 +81,7 @@
       searchText(val) {
         this.$store.commit('setLoading', val !== '');
         this.$store.commit('setSearchValue', val);
+        this.$store.commit('setLoadedShows', []);
         this.$store.dispatch('clearError');
 
         // if already searching, remove old timeout
