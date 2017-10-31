@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-const apiUrl = ' https://api.tvmaze.com/search/shows?q=';
+const apiUrl = 'http://localhost:3000/search/';
 
 /* eslint-disable no-param-reassign */
+/* eslint-disable max-len */
+
 
 const shows = {
   state: {
@@ -24,7 +26,7 @@ const shows = {
         .then((response) => {
           const foundShows = [];
           response.data.forEach((result) => {
-            foundShows.push(result.show);
+            foundShows.push(result);
           });
 
           commit('setLoadedShows', foundShows);
@@ -38,7 +40,19 @@ const shows = {
   },
   getters: {
     loadedShows(state) {
-      return state.loadedShows.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase());
+      return state.loadedShows.sort((a, b) => {
+        console.log(`${a.seriesName.toLowerCase()} < ${b.seriesName.toLowerCase()}`);
+        if (a.seriesName.toUpperCase() < b.seriesName.toUpperCase()) {
+          console.log(-1);
+          return -1;
+        } else if (a.seriesName.toUpperCase() > b.seriesName.toUpperCase()) {
+          console.log(1);
+          return 1;
+        }
+        console.log(0);
+        return 0;
+        // a.seriesName.toLowerCase() < b.seriesName.toLowerCase()
+      });
     },
   },
 };

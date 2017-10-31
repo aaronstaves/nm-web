@@ -1,6 +1,6 @@
 <template>
-  <v-card dark>
-    <v-card-media :src="image" height="450" >
+  <v-card class="show-card" dark :to="`show/${show.id}`">
+    <v-card-media :src="image" height="140" >
       <div class="no-image" v-if="image === ''">
         <v-icon dark large>tv</v-icon>
         <p>
@@ -11,7 +11,7 @@
 
     <v-card-title class="show-card-title text-xs-center primary">
       <v-flex>
-        {{ show.name }}
+        {{ show.seriesName }}
       </v-flex>
     </v-card-title>
   </v-card>
@@ -25,14 +25,17 @@ export default {
       if (this.show.image === null || this.show.image === undefined) {
         return '';
       }
-      return this.show.image.medium;
+      return this.show.image;
     },
   },
 };
 </script>
 
 
-<<style scoped>
+<style scoped>
+.show-card {
+  cursor: pointer;
+}
 .no-image {
   margin: auto;
   text-align: center;

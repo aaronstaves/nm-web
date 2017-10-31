@@ -1,7 +1,7 @@
 <template>
   <v-container fluid grid-list-md>
     <v-layout row wrap>
-      <v-flex xs12 sm6 md4 lg3 v-for="item in shows" :key="item.id">
+      <v-flex xs12 xl6 v-for="item in shows" :key="item.id">
         <list-item :show="item"></list-item>
       </v-flex>
     </v-layout>
@@ -17,6 +17,7 @@ export default {
   },
   computed: {
     shows() {
+      console.dir(this.$store.getters.loadedShows);
       return this.$store.getters.loadedShows;
     },
   },
