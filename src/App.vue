@@ -16,7 +16,7 @@
     <v-toolbar dark color="primary" class="hidden-sm-and-up" extended>
       <v-layout row wrap class="mt-5">
         <v-flex xs12 class="text-xs-center">
-          <v-toolbar-title class="white--text">NM Demo: TV Shows</v-toolbar-title>
+          <v-toolbar-title class="white--text">Demo: TV Shows</v-toolbar-title>
         </v-flex>
         <!-- hide search field in xs -->
         <v-flex xs12 class="pt-2">
@@ -59,9 +59,16 @@
         // start new timeout
         this.$_searchTextTimeout = setTimeout(() => {
           this.$store.dispatch('loadShows');
+          this.$router.push('/');
         }, 1000);
       },
     },
   };
 
 </script>
+
+<style>
+.hidden {
+  display: none;
+}
+</style>

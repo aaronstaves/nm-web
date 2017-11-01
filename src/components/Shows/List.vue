@@ -17,7 +17,6 @@ export default {
   },
   computed: {
     shows() {
-      console.dir(this.$store.getters.loadedShows);
       return this.$store.getters.loadedShows;
     },
   },
