@@ -2,7 +2,7 @@
   <v-card class="show-card" dark :to="`show/${show.id}`">
 
     <!-- small card -->
-    <v-card-media :src="image" height="70" class="hidden-md-and-up">
+    <v-card-media :src="image" height="100" class="hidden-md-and-up">
       <div class="no-image" v-if="image === ''">
         <v-icon dark large>tv</v-icon>
         <p>

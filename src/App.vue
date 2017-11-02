@@ -2,7 +2,9 @@
   <v-app>
     <!-- large toolbar -->
     <v-toolbar dark color="primary" class="hidden-xs-only">
-      <v-toolbar-title class="white--text">Demo: TV Shows</v-toolbar-title>
+      <router-link to="/">
+        <v-toolbar-title :to="'/'" class="white--text">Demo: TV Shows</v-toolbar-title>
+      </router-link>
       <v-spacer></v-spacer>
       <v-text-field 
         prepend-icon="search"
@@ -16,7 +18,9 @@
     <v-toolbar dark color="primary" class="hidden-sm-and-up" extended>
       <v-layout row wrap class="mt-5">
         <v-flex xs12 class="text-xs-center">
-          <v-toolbar-title class="white--text">Demo: TV Shows</v-toolbar-title>
+          <router-link to="/">
+            <v-toolbar-title :to="'/'" class="white--text">Demo: TV Shows</v-toolbar-title>
+          </router-link>
         </v-flex>
         <!-- hide search field in xs -->
         <v-flex xs12 class="pt-2">
@@ -30,7 +34,7 @@
       </v-layout>
     </v-toolbar>
     <app-alert></app-alert>
-    <main>
+    <main></main>
       <router-view></router-view>
     </main>
   </v-app>

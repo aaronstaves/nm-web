@@ -93,10 +93,10 @@ export default {
   props: ['id'],
   components: { 'search-view': Search },
   created() {
-    if (this.show && this.show.id === this.id) {
+    if (this.show && this.show.id === parseInt(this.id, 0)) {
       return;
     }
-    this.$store.dispatch('loadShow', this.id);
+    this.$store.dispatch('loadShow', parseInt(this.id, 0));
   },
   computed: {
     aliases() {
