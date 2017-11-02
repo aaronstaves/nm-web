@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiUrl = 'http://localhost:3000';
+const apiUrl = 'http://nm-api.aarons.io';
 
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
@@ -8,6 +8,7 @@ const apiUrl = 'http://localhost:3000';
 
 const shows = {
   state: {
+    isLoadingShow: false,
     loadedShows: [],
     loadedShow: null,
   },
@@ -18,6 +19,9 @@ const shows = {
     setLoadedShow(state, payload) {
       state.loadedShow = payload;
     },
+    setLoadingShow(state, payload) {
+      state.isLoadingShow = payload;
+    },
   },
   actions: {
     loadShows({ commit, getters }) {
@@ -26,7 +30,7 @@ const shows = {
       }
 
       commit('setLoading', true);
-      const url = `${apiUrl}/search/${getters.searchValue}`;
+      const url = `${apiUrl}/search/${encodeURIComponent(getters.searchValue)}`;
       axios.get(url)
         .then((response) => {
           const foundShows = [];
@@ -49,6 +53,7 @@ const shows = {
     },
     loadShow({ commit, getters }, showId) {
       commit('setLoading', true);
+      commit('setLoadingShow', true);
 
       // otherwise grab the show
       const url = `${apiUrl}/series/${showId}`;
@@ -56,9 +61,11 @@ const shows = {
         .then((response) => {
           commit('setLoadedShow', response.data);
           commit('setLoading', false);
+          commit('setLoadingShow', false);
         })
         .catch((error) => {
           commit('setLoading', false);
+          commit('setLoadingShow', false);
           if (error.response.status === 404) {
             commit('setError', 'No shows found');
           } else {
@@ -80,6 +87,9 @@ const shows = {
     },
     loadedShow(state) {
       return state.loadedShow;
+    },
+    isLoadingShow(state) {
+      return state.isLoadingShow;
     },
   },
 };

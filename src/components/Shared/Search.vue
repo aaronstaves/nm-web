@@ -2,7 +2,7 @@
   <v-container>
 
     <!-- no shows/search display -->
-    <v-layout row wrap v-if="loadedShows.length === 0">
+    <v-layout row wrap v-if="loadedShows.length === 0 || isLoadingShow">
       <v-flex xs12 class="text--blue text-xs-center" v-bind:class="{ hidden: isLoading}">
         <v-icon large style="font-size: 2.5em" class="hidden-sm-and-up" color="ghosted">search</v-icon>
         <v-icon large style="font-size: 5em" class="hidden-xs-only" color="ghosted">search</v-icon>
@@ -23,18 +23,23 @@
 export default {
   computed: {
     searchDescription() {
-      if (this.$store.getters.isLoading) {
+      if (this.$store.getters.isLoadingShow) {
+        return 'Loading Show';
+      } else if (this.$store.getters.isLoading) {
         return `Searching for ${this.searchValue}`;
       } else if (this.errorMessage !== null && this.errorMessage !== undefined) {
         return 'Search Failed';
       }
-      return 'No Shows Found';
+      return 'Enter text above to find shows';
     },
     searchValue() {
       return this.$store.getters.searchValue;
     },
     isLoading() {
       return this.$store.getters.isLoading;
+    },
+    isLoadingShow() {
+      return this.$store.getters.isLoadingShow;
     },
     loadedShows() {
       return this.$store.getters.loadedShows;

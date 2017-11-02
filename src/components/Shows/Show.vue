@@ -93,9 +93,10 @@ export default {
   props: ['id'],
   components: { 'search-view': Search },
   created() {
-    if (this.show === null || this.show === undefined) {
-      this.$store.dispatch('loadShow', this.id);
+    if (this.show && this.show.id === this.id) {
+      return;
     }
+    this.$store.dispatch('loadShow', this.id);
   },
   computed: {
     aliases() {

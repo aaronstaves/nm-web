@@ -2,7 +2,7 @@
   <v-app>
     <!-- large toolbar -->
     <v-toolbar dark color="primary" class="hidden-xs-only">
-      <v-toolbar-title class="white--text">NM Demo: TV Shows</v-toolbar-title>
+      <v-toolbar-title class="white--text">Demo: TV Shows</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text-field 
         prepend-icon="search"
