@@ -1,8 +1,18 @@
 <template>
   <v-card class="show-card" dark :to="`show/${show.id}`">
 
+    <!-- xs card -->
+    <v-card-media :src="image" height="100" contain class="hidden-sm-and-up">
+      <div class="no-image" v-if="image === ''">
+        <v-icon dark large>tv</v-icon>
+        <p>
+          No Image Found
+        </p>
+      </div>
+    </v-card-media>
+
     <!-- small card -->
-    <v-card-media :src="image" height="100" class="hidden-md-and-up">
+    <v-card-media :src="image" height="100" class="hidden-xs-only hidden-md-and-up">
       <div class="no-image" v-if="image === ''">
         <v-icon dark large>tv</v-icon>
         <p>
